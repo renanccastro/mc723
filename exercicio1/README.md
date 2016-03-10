@@ -1,5 +1,6 @@
 # Exercício 1
-
+Nome: Renan Camargo de Castro
+RA:147775
 ## Introdução
 Neste exercício foi feita a medição de desempenho de um programa que verifica se um número é primo da forma mais simples, testando parelização e também otimização com flags de compilação.
 
