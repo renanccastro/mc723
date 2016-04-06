@@ -29,17 +29,14 @@ if __name__ == "__main__":
             for cachedsize in poweroftwo:
                 #subprocess.cwd("%s/%s" % (location,val))
                 cwd=(("%s/%s") % (location,val))
+                os.chdir(cwd)
                 string=(("/home/staff/lucas/mc723/dinero4sbc/dineroIV -informat s -trname %s -maxtrace 20 "
                                      "-l1-isize %dK -l1-dsize %dK "
-                                     "-l1-ibsize %d -l1-dbsize %d") %
+                                     "-l1-ibsize %d -l1-dbsize %d | grep \"Demand miss rate\" | awk -F ' ' '{print $4}' | xargs -n2 >> ~/teste.data &") %
                                      (names[idx], cacheisize, cachedsize, ibsize,dbsize))
-                p1=Popen(args=string, cwd=cwd, shell=True, stdout=PIPE)
-                p2=Popen(args="grep \"Demand miss rate\"", cwd=cwd, shell=True, stdout=PIPE, stdin=p1.stdout)
-                p3=Popen(args="awk -F ' ' '{print $4}' ", cwd=cwd, shell=True, stdout=PIPE, stdin=p2.stdout)
-                p4=Popen(args="xargs -n2", cwd=cwd, shell=True, stdout=PIPE, stdin=p3.stdout)
-                output=p4.communicate()[0]
-                print cacheisize, " ", cachedsize," ",output
-                print >> f, cacheisize, " ", cachedsize," ",output
+                os.system(string)
+#                print cacheisize, " ", cachedsize," ",output
+                #print >> f, cacheisize, " ", cachedsize," ",output
                 # dineroIV -informat s -trname vortex_f2b -maxtrace 101 -l1-isize 16K -l1-dsize 16K -l1-ibsize 32 -l1-dbsize 32
             
         
