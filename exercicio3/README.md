@@ -5,7 +5,7 @@
 
 ##Introdução
 Nesse exercício, iremos analisar e utilizar um simulador do mips feito com archc/systemc para contar os CPIs.
-Após montado toda a estrutura, contar com o simulador do mips compilado e todos os paths corretos, foi realizado algumas experiências.
+Após montado toda a estrutura, usamos o simulador do mips para realizar  algumas experiências.
 
 ##Hello World
 Para testar a execução e ver o funcionamento, foi feito o programa mais simples em C e compilado com o gcc do arm, foi rodado no mips.x, que é o simulador.
@@ -75,9 +75,10 @@ ArchC: Simulation statistics
 
 ~~~
 
-Nesse caso, podemos ver que não existe instruções de add, só são utilizadas instruções ADDU.
+Nesse caso, podemos ver que não existem instruções de add, só são utilizadas instruções ADDU (conferido com o objdump).
 
-Isso se deve, principalmente, ao fato de como a linguagem C trata o overflow. Ela não identifica se houve overflow, apenas deixa o número estourar e voltar ao negativo. Dessa forma, como a diferença entre add e addu é a identificação do overflow e a setagem dos bits de overflow, o GCC utilizada, na compilação, a instrução de ADDU(já que pela definição, a linguagem C não precisa usar add).
+Isso se deve, principalmente, ao modo que a linguagem C trata o overflow. Ela não identifica se houve overflow, apenas deixa o número estourar e voltar ao negativo.
+Por esse motivo, e ainda, como a diferença entre add e addu é somente a identificação do overflow e a setagem dos bits de overflow, o GCC utiliza, na compilação, a instrução de ADDU(já que pela definição, a linguagem C não precisa usar add).
 
 A operação bitwise de adição é a mesma para signed e unsigned.
 
@@ -97,12 +98,14 @@ Para obter as estatísticas de ciclos, precisamos classificar as instruções co
 
 E somar, multiplicando cada instrução pelo seu número de aparições e "peso", para obter a quantidade de ciclos totais.
 
-Para obter essas informações, rodamos os programas mencionados com a seguinte linha de comando:
+Para obter essas informações, rodamos os programas mencionados com a seguinte linha de comando, substituindo, logicamente, o programa hello_world pelo programa em questão:
 
 ~~~bash
 ./mips.x --load=hello_world.mips 2>&1 >/dev/null |  grep 'COUNT' | awk '{print $3}'
 ~~~
-e coloquei no excel para poder analisar.
+e foi colocado no google docs para poder analisar.
+
+Ps: essa linha facilita na obtenção dos dados, pois já fornece tudo em uma coluna, podendo só colar no excel.
 
 ##Lame - Small
 Exemplo de uma execução normal:
@@ -139,7 +142,6 @@ ArchC: Simulation statistics
 ~~~
 
 ###Resultados
-
 As instruções computadas e seus números estão na [seguinte tabela do google docs.] (https://docs.google.com/spreadsheets/d/1IgAyIb9RuEe49SyDdr0r7_q39E9Pi9GU53zsDwoLtXc/edit?usp=sharing)
 
 A quantidade de ciclos necessárias para executar o programa foi de
