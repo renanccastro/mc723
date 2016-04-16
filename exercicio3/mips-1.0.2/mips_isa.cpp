@@ -40,7 +40,7 @@ using namespace mips_parms;
 
 static int processors_started = 0;
 #define DEFAULT_STACK_SIZE (256*1024)
-int add_instr_counter = 0;
+
 //!Generic instruction behavior method.
 void ac_behavior( instruction )
 { 
@@ -71,15 +71,14 @@ void ac_behavior(begin)
   lo = 0;
 
   RB[29] =  AC_RAM_END - 1024 - processors_started++ * DEFAULT_STACK_SIZE;
-  add_instr_counter = 0;
+
+
 }
 
 //!Behavior called after finishing simulation
 void ac_behavior(end)
 {
   dbg_printf("@@@ end behavior @@@\n");
-  dbg_printf("quntidade de adds: %#x",add_instr_counter);
-  cerr << "quantidade de adds " << add_instr_counter << endl;
 }
 
 
@@ -307,7 +306,6 @@ void ac_behavior( lui )
 //!Instruction add behavior method.
 void ac_behavior( add )
 {
-  add_instr_counter++;
   dbg_printf("add r%d, r%d, r%d\n", rd, rs, rt);
   RB[rd] = RB[rs] + RB[rt];
   dbg_printf("Result = %#x\n", RB[rd]);
