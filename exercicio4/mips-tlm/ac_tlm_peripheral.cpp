@@ -84,8 +84,7 @@ ac_tlm_rsp_status ac_tlm_peripheral::writem( const uint32_t &a , const uint32_t 
 ac_tlm_rsp_status ac_tlm_peripheral::readm( const uint32_t &a , uint32_t &d )
 {
   d = this->lock;
-  if(this->lock == 0)
-	this->lock = 1;
+  this->lock = 1;
   return SUCCESS;
 }
 
