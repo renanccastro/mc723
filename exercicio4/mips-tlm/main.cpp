@@ -53,9 +53,9 @@ int sc_main(int ac, char *av[])
   ac_trace("mips_proc2.trace");
 #endif 
   char **av_copy;
-  av_copy = (char**)malloc(sizeof(char*)*(ac)); // plus one extra which will mark the end of the array
+  av_copy = (char**)malloc(sizeof(char*)*(ac)+1); // plus one extra which will mark the end of the array
   for(int i = 0; i < ac; i++){
-	av_copy[i] = (char*) malloc(strlen(av[i]));
+	av_copy[i] = (char*) malloc(strlen(av[i])+1);
 	strcpy(av_copy[i], av[i]);
   }
   mips_proc1.init(ac, av);
