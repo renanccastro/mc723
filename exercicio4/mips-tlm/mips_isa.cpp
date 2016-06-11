@@ -71,7 +71,7 @@ void ac_behavior(begin)
   lo = 0;
 
   RB[29] =  AC_RAM_END - 1024 - processors_started++ * DEFAULT_STACK_SIZE;
-
+  printf("@@@@ SP for processor %d : 0x%x\n", processors_started-1,RB[29]);
 
 }
 

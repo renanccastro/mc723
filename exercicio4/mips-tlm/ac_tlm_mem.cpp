@@ -44,11 +44,12 @@ using user::ac_tlm_mem;
 /// Constructor
 ac_tlm_mem::ac_tlm_mem( sc_module_name module_name , int k ) :
   sc_module( module_name ),
-  target_export("iport")
+  target_export1("iport1"),
+  target_export2("iport2")
 {
     /// Binds target_export to the memory
-    target_export( *this );
-
+    target_export1( *this );
+    target_export2( *this );
     /// Initialize memory vector
     memory = new uint8_t[ k ];
     // for(k=k-1;k>0;k--) memory[k]=0;

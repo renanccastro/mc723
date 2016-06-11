@@ -62,7 +62,8 @@ class ac_tlm_mem :
 {
 public:
   /// Exposed port with ArchC interface
-  sc_export< ac_tlm_transport_if > target_export;
+  sc_export< ac_tlm_transport_if > target_export1;
+  sc_export< ac_tlm_transport_if > target_export2;
   /// Internal write
   ac_tlm_rsp_status writem( const uint32_t & , const uint32_t & );
   /// Internal read

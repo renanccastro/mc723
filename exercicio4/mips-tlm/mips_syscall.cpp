@@ -90,7 +90,7 @@ void mips_syscall::set_prog_args(int argc, char **argv)
   unsigned int ac_argv[30];
   char ac_argstr[512];
 
-  base = AC_RAM_END - 1024 - procNumber * 256 * 1024;
+  base = AC_RAM_END - 512 - procNumber * 256 * 1024;
   for (i=0, j=0; i<argc; i++) {
     int len = strlen(argv[i]) + 1;
     ac_argv[i] = base + j;
