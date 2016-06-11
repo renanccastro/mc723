@@ -1,7 +1,8 @@
 #include <stdio.h>
 #define LOCK_ADDRESS 0x6400000
-#define ACQUIRE_LOCK while(*((int*)LOCK_ADDRESS))
-#define RELEASE_LOCK *((int*)LOCK_ADDRESS)=0
+#define ACQUIRE_LOCK while(*(globalLock))
+#define RELEASE_LOCK *(globalLock)=0
+volatile int * globalLock = (int*) LOCK_ADDRESS;
 int main(){
 
 	ACQUIRE_LOCK;
