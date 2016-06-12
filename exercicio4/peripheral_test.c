@@ -1,13 +1,28 @@
 #include <stdio.h>
 #define LOCK_ADDRESS 0x6400000
-#define ACQUIRE_LOCK while(*(globalLock))
-#define RELEASE_LOCK *(globalLock)=0
-volatile int * globalLock = (int*) LOCK_ADDRESS;
-int main(){
+volatile int procCounter = 0;
+volatile int *lock = (volatile int *) LOCK_ADDRESS;
 
-	ACQUIRE_LOCK;
-	printf("hello World\n");
-	RELEASE_LOCK;
+void AcquireLock(){
+	while(*lock);
+}
+void ReleaseLock(){
+	*lock = 0;
+}
+
+
+int main(){
+	int procNumber;
+	AcquireLock();
+	procNumber = procCounter;
+	procCounter++;
+	ReleaseLock();
+
+
+	AcquireLock();
+	//printf("Lock: %d from proc: %d", lock, procNumber);
+	printf("testest"); 
+	ReleaseLock();
 	
 	return 0;
 }

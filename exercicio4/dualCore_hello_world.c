@@ -30,6 +30,5 @@ int main(int ac, char *av[]){
     for (i=0;i<100000;i++);
   }
   RecursiveHello(10, procNumber);
-  exit(0);
   return 0; 
 }
